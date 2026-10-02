@@ -1,4 +1,4 @@
-import { date, integer, pgTable, primaryKey, serial, text, timestamp } from 'drizzle-orm/pg-core'
+import { date, integer, jsonb, pgTable, primaryKey, serial, text, timestamp } from 'drizzle-orm/pg-core'
 
 export const players = pgTable('zesto_players', {
   wallet: text('wallet').primaryKey(),
@@ -96,6 +96,34 @@ export const payments = pgTable('zesto_payments', {
   amount: integer('amount').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 })
+
+export const islands = pgTable('zesto_islands', {
+  wallet: text('wallet').primaryKey(),
+  tiles: text('tiles').notNull(),
+  radius: integer('radius').notNull().default(2),
+  seeds: integer('seeds').notNull().default(40),
+  seedsAt: timestamp('seeds_at', { withTimezone: true }).notNull().defaultNow(),
+  discovered: jsonb('discovered').$type<string[]>().notNull(),
+  wonders: jsonb('wonders').$type<string[]>().notNull(),
+  hints: jsonb('hints').$type<string[]>().notNull(),
+  spirits: jsonb('spirits').$type<{ id: string; at: string }[]>().notNull(),
+  lanterns: integer('lanterns').notNull().default(0),
+  placements: integer('placements').notNull().default(0),
+  streak: integer('streak').notNull().default(0),
+  lastCheckin: date('last_checkin'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+})
+
+export const lanterns = pgTable(
+  'zesto_lanterns',
+  {
+    owner: text('owner').notNull(),
+    visitor: text('visitor').notNull(),
+    day: date('day').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [primaryKey({ columns: [t.owner, t.visitor, t.day] })],
+)
 
 export const nonces = pgTable('zesto_nonces', {
   wallet: text('wallet').primaryKey(),

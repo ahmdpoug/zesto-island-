@@ -246,7 +246,22 @@ export function canAfford(resources: Resources, cost: Cost) {
   return (Object.entries(cost) as [ResourceId, number][]).every(([k, v]) => resources[k] >= v)
 }
 
-export type PointSource = 'signup' | 'dig' | 'gather' | 'build' | 'upgrade' | 'smelt' | 'craft' | 'collect' | 'checkin' | 'quest'
+export type PointSource =
+  | 'signup'
+  | 'dig'
+  | 'gather'
+  | 'build'
+  | 'upgrade'
+  | 'smelt'
+  | 'craft'
+  | 'collect'
+  | 'checkin'
+  | 'quest'
+  | 'place'
+  | 'landmark'
+  | 'wonder'
+  | 'spirit'
+  | 'lantern'
 
 export const POINT_SOURCES: { source: PointSource; label: string; value: string }[] = [
   { source: 'signup', label: 'Create your account', value: `+${SIGNUP_BONUS}` },

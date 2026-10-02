@@ -12,7 +12,7 @@ import { robinhoodTestnet } from '@/lib/zesto/chain'
 
 const storageKey = (address: string) => `zesto:session:${address.toLowerCase()}`
 
-class AuthError extends Error {}
+export class AuthError extends Error {}
 
 function readToken(address?: string) {
   if (!address || typeof window === 'undefined') return null
@@ -32,7 +32,7 @@ function writeToken(address: string, token: string | null) {
   }
 }
 
-async function request<T>(url: string, token: string, init?: RequestInit): Promise<T> {
+export async function request<T>(url: string, token: string, init?: RequestInit): Promise<T> {
   const res = await fetch(url, {
     ...init,
     headers: { 'content-type': 'application/json', authorization: `Bearer ${token}`, ...init?.headers },

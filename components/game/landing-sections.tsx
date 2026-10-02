@@ -1,19 +1,20 @@
-import { Anvil, Coins, Hammer, Map, ShieldCheck, Shovel, TreePalm, Trophy } from 'lucide-react'
-import { DIG_COST, POINTS_POOL_PERCENT, POINTS_POOL_TOKENS } from '@/lib/zesto/config'
+import { Coins, Flame, Landmark, Leaf, ShieldCheck, Snowflake, Sparkles, Trophy } from 'lucide-react'
+import { POINTS_POOL_PERCENT, POINTS_POOL_TOKENS } from '@/lib/zesto/config'
+import { LANDMARKS, WONDERS } from '@/lib/habitat/data'
 
 const FEATURES = [
-  { icon: Shovel, title: 'Dig for treasure', body: `Spend ${DIG_COST} $ZESTO per dig to unearth common to legendary finds, settled on-chain.` },
-  { icon: TreePalm, title: 'Gather materials', body: 'Harvest wood, stone and ore across the island using free, regenerating energy.' },
-  { icon: Hammer, title: 'Build a homestead', body: 'Raise a Forge, Mill, Quarry, Beacon and Vault that produce while you are away.' },
-  { icon: Anvil, title: 'Craft better tools', body: 'Smelt ingots and forge tools that boost the yield of every action you take.' },
-  { icon: Map, title: 'Explore a big world', body: 'Travel between regions with a live minimap and a full world map with fast travel.' },
-  { icon: Trophy, title: 'Climb the leaderboard', body: 'Complete daily and weekly quests, keep your streak and rank against every player.' },
+  { icon: Leaf, title: 'Shape your island', body: 'Paint grass, forest, meadow, farm, sand, rock and water onto a tiny hex island using free, regrowing seeds.' },
+  { icon: Landmark, title: `Discover ${LANDMARKS.length} landmarks`, body: 'Arrange tiles in the right pattern and a windmill, shrine or lighthouse appears. Every first discovery earns points.' },
+  { icon: Trophy, title: `Unlock ${WONDERS.length} Wonders`, body: 'Gather three themed landmarks together to trigger a festival Wonder worth up to 1,500 points.' },
+  { icon: Snowflake, title: 'Live seasons', body: 'The whole world shifts from spring to winter each day. Some landmarks only appear in one season.' },
+  { icon: Sparkles, title: 'Spirits of Light', body: 'Grow a lively island to attract glowing spirits, from common wisps to the legendary Dawn Bird.' },
+  { icon: Flame, title: 'Visit neighbours', body: 'Tour other islands and light a lantern each day. You both earn points for every visit.' },
 ]
 
 const STEPS = [
   { n: '01', title: 'Connect', body: 'Log in with your wallet or email in seconds.' },
   { n: '02', title: 'Verify', body: 'Sign a free message. No gas, no funds moved.' },
-  { n: '03', title: 'Play & earn', body: 'Every dig, harvest and build earns points.' },
+  { n: '03', title: 'Grow & earn', body: 'Every tile, landmark and spirit earns points.' },
 ]
 
 function compact(n: number) {
@@ -24,7 +25,7 @@ export function StatsStrip() {
   const stats = [
     { label: 'Points pool', value: `${POINTS_POOL_PERCENT}%`, hint: 'of total supply' },
     { label: 'Tokens to players', value: compact(POINTS_POOL_TOKENS), hint: '$ZESTO at TGE' },
-    { label: 'Cost per dig', value: String(DIG_COST), hint: '$ZESTO on testnet' },
+    { label: 'Landmarks', value: String(LANDMARKS.length), hint: 'to discover' },
   ]
   return (
     <dl className="glass grid grid-cols-3 divide-x divide-border/60 rounded-2xl">

@@ -5,6 +5,7 @@ import { ArrowLeft, Check, Lock, LoaderCircle, ShieldAlert } from 'lucide-react'
 import { useState } from 'react'
 import { CHARACTERS, type CharacterId } from '@/lib/zesto/config'
 import { SIGNUP_BONUS } from '@/lib/zesto/economy'
+import { PERKS } from '@/lib/habitat/data'
 import { cn } from '@/lib/utils'
 
 export function CharacterSelect({
@@ -30,7 +31,7 @@ export function CharacterSelect({
             Choose your Zesto
           </h1>
           <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground text-pretty sm:text-base">
-            Your character is bound to this wallet forever. Pick the perk that fits how you want to play.
+            Your Zesto tends your island forever. Pick the perk that fits the habitat you want to grow.
           </p>
         </div>
 
@@ -57,7 +58,7 @@ export function CharacterSelect({
                   <span className="relative block aspect-[4/5]">
                     <Image
                       src={c.image || '/placeholder.svg'}
-                      alt={`${c.name}, ${c.title}`}
+                      alt={`${c.name}, ${PERKS[c.id].title}`}
                       fill
                       sizes="(min-width: 640px) 220px, 25vw"
                       className="object-cover transition duration-500 group-hover:scale-105"
@@ -65,7 +66,7 @@ export function CharacterSelect({
                     <span className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent" />
                     <span className="absolute inset-x-0 bottom-0 p-2 sm:p-3">
                       <span className="block font-display text-sm font-semibold sm:text-xl">{c.name}</span>
-                      <span className="hidden text-xs text-white/75 sm:block">{c.title}</span>
+                      <span className="hidden text-xs text-white/75 sm:block">{PERKS[c.id].title}</span>
                     </span>
                     {selected ? (
                       <span className="absolute right-1.5 top-1.5 grid size-6 place-items-center rounded-full bg-primary text-primary-foreground">
@@ -114,10 +115,10 @@ export function CharacterSelect({
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <div className="min-w-0 flex-1 px-1">
                 <p className="font-display text-lg font-semibold leading-tight">
-                  {hero.name} <span className="text-sm font-medium text-muted-foreground">{hero.title}</span>
+                  {hero.name} <span className="text-sm font-medium text-muted-foreground">{PERKS[hero.id].title}</span>
                 </p>
                 <p className="mt-0.5 text-sm" style={{ color: hero.color }}>
-                  {hero.perkLabel}
+                  {PERKS[hero.id].label}
                 </p>
               </div>
               <button

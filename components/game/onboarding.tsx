@@ -30,7 +30,7 @@ export function Onboarding({
         <header className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="grid size-8 place-items-center rounded-lg btn-primary font-display text-sm font-extrabold">Z</span>
-            <span className="font-display text-base font-bold tracking-tight">Zesto Dig</span>
+            <span className="font-display text-base font-bold tracking-tight">Zesto Habitats</span>
           </div>
           <nav aria-label="Primary" className="flex items-center gap-1">
             <a
@@ -61,14 +61,14 @@ export function Onboarding({
               {`${POINTS_POOL_PERCENT}% of supply reserved for players`}
             </p>
             <h1 className="font-display text-5xl font-extrabold leading-[0.95] tracking-tighter text-balance sm:text-7xl lg:text-8xl">
-              Dig. Build.
+              Grow a tiny
               <br />
               <span className="bg-gradient-to-b from-[#ffe0ad] via-[#ffb35c] to-[#ff8a2a] bg-clip-text text-transparent">
-                Own the island.
+                living island.
               </span>
             </h1>
             <p className="max-w-md text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg">
-              An on-chain treasure hunt where every dig, harvest and build earns points toward the $ZESTO launch.
+              Paint tiles, discover hidden landmarks and attract Spirits of Light. Every discovery earns points toward the $ZESTO launch.
             </p>
           </div>
 
@@ -85,7 +85,7 @@ export function Onboarding({
 
         <footer className="mt-auto flex flex-col items-center gap-4 pt-8">
           <div className="hairline w-full" />
-          <p className="text-xs text-muted-foreground">{'Zesto Dig · Testnet season · Points are not a promise of value'}</p>
+          <p className="text-xs text-muted-foreground">{'Zesto Habitats · Testnet season · Points are not a promise of value'}</p>
         </footer>
       </div>
     </div>
@@ -132,7 +132,7 @@ function AuthCard({
       {step === 'loading' ? (
         <div className="flex h-12 items-center justify-center gap-2 text-sm text-muted-foreground" role="status">
           <LoaderCircle className="size-4 animate-spin text-primary" aria-hidden="true" />
-          Loading your homestead…
+          Loading your island…
         </div>
       ) : (
         <button
@@ -156,7 +156,7 @@ function AuthCard({
       <p className="px-3 pb-3 text-center text-xs text-muted-foreground text-pretty">
         {step === 'sign'
           ? `Sign a free message with ${address ? shortAddress(address) : 'your wallet'}. No gas, no funds moved.`
-          : 'Free to start. Gather and build without spending a token.'}
+          : 'Free to start. Shape your island without spending a token.'}
       </p>
     </div>
   )

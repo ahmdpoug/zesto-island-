@@ -9,16 +9,20 @@ const PROMPT =
 
 export async function POST() {
   if (process.env.NODE_ENV === 'production') return new Response('Not found', { status: 404 })
-  const publicDir = path.join(process.cwd(), 'public', 'promo')
-  const image = await readFile(path.join(publicDir, 'keyframe.png'))
-  const { video, warnings } = await generateVideo({
-    model: 'bytedance/seedance-v1.5-pro',
-    prompt: { image, text: PROMPT },
-    aspectRatio: 'adaptive',
-    resolution: '1280x720',
-    duration: 12,
-    generateAudio: true,
-  })
-  await writeFile(path.join(publicDir, 'clip.mp4'), video.uint8Array)
-  return Response.json({ bytes: video.uint8Array.length, mediaType: video.mediaType, warnings })
+  try {
+    const publicDir = path.join(process.cwd(), 'public', 'promo')
+    const image = await readFile(path.join(publicDir, 'keyframe.png'))
+    const { video, warnings } = await generateVideo({
+      model: 'bytedance/seedance-v1.5-pro',
+      prompt: { image, text: PROMPT },
+      aspectRatio: '16:9',
+      resolution: '1280x720',
+      duration: 12,
+      generateAudio: true,
+    })
+    await writeFile(path.join(publicDir, 'zesto-trailer.mp4'), video.uint8Array)
+    return Response.json({ bytes: video.uint8Array.length, mediaType: video.mediaType, warnings })
+  } catch (error) {
+    return Response.json({ error: error instanceof Error ? error.message : String(error) }, { status: 500 })
+  }
 }
